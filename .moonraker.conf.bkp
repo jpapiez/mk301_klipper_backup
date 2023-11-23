@@ -26,6 +26,9 @@ trusted_clients =
 
 [history]
 
+[spoolman]
+server = http://octofarm.local:7912
+
 [announcements]
 subscriptions = 
 	octoeverywhere
