@@ -27,7 +27,7 @@ trusted_clients =
 [history]
 
 [spoolman]
-server = http://octofarm.local:7912
+server = http://10.0.4.184:7912
 
 [announcements]
 subscriptions = 
@@ -65,14 +65,6 @@ primary_branch = main
 managed_services = sonar
 install_script = tools/install.sh
 
-[update_manager prusa]
-type = git_repo
-origin = https://github.com/dz0ny/klipper-prusa-mk3s.git
-path = ~/printer_data/config/klipper-prusa-mk3s
-primary_branch = main
-is_system_service = False
-managed_services = klipper
-
 [update_manager Klipper-Adaptive-Meshing-Purging]
 type = git_repo
 channel = dev
@@ -91,4 +83,12 @@ requirements = requirements.txt
 install_script = install.sh
 managed_services = 
 	octoeverywhere
+
+[update_manager klipper_auto_speed]
+type = git_repo
+path = ~/klipper_auto_speed
+origin = https://github.com/jpapiez/klipper_auto_speed.git
+primary_branch = main
+install_script = install.sh
+managed_services = klipper
 

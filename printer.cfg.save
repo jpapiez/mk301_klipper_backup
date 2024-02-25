@@ -13,33 +13,47 @@
 ### UI
 [include mainsail.cfg]
 
+[exclude_object]
+
 [mcu]
 # serial: /dev/serial0 # If you are using internal RPI serial port
 serial: /dev/ttyACM0 # If you are using RPI via USB connection to printer
 restart_method: command
 
 ### CONTROL BOARD
-[include klipper-prusa-mk3s/mk3s/einsy-rambo.cfg]
-
-[bed_mesh]
-probe_count: 7,7
-speed: 250
+[include mk3s/einsy-rambo.cfg]
 
 ### BASE SETUP
-[include klipper-prusa-mk3s/mk3s/display.cfg]
-[include klipper-prusa-mk3s/mk3s/steppers.cfg]
-[include klipper-prusa-mk3s/mk3s/tmc2130.cfg]
+[include mk3s/display.cfg]
+[include mk3s/steppers.cfg]
+[include mk3s/tmc2130.cfg]
+
+[stepper_x]
+microsteps: 64
+
+[stepper_y]
+microsteps: 64
+
+[stepper_z]
+microsteps: 64
+
+[extruder]
+microsteps: 128
+
+[tmc2130 stepper_z]
+[tmc2130 stepper_z]
+interpolate: Falseinterpolate: False
 
 ### EXTRUSION
 
 # Extruder
-[include klipper-prusa-mk3s/extruders/bmg.cfg]
+[include extruders/bmg.cfg]
 
 # Hotend
-[include klipper-prusa-mk3s/hotends/mosquito.cfg]
+[include hotends/mosquito.cfg]
+[include hotends/atc_104gt-2.cfg]
 
-# Thermistors
-[include klipper-prusa-mk3s/hotends/atc_104gt-2.cfg]
+[include KAMP_Settings.cfg]
 
 [extruder]
 # To tune Pressure Advance see https://www.klipper3d.org/Pressure_Advance.html
@@ -53,16 +67,12 @@ nozzle_diameter: 0.4 # Remember to change this if you change nozzle diameter.
 
 ## For faster printing enable
 [printer]
-max_velocity: 300
-max_accel: 4000
-max_accel_to_decel: 4000
+kinematics: cartesian
+max_accel: 10000
+max_accel_to_decel: 8000
+max_velocity: 500
 max_z_velocity: 20
 max_z_accel: 300
-#max_accel: 10000
-#max_accel_to_decel: 8000
-#max_velocity: 500
-#max_z_velocity: 20
-#max_z_accel: 300
 square_corner_velocity: 5
 
 ## Custom bed mest probes
@@ -73,8 +83,7 @@ speed: 250
 
 # Linear correction
 # Default Prusa linear correction optimized for LDO motors
-# Check `extruders/linear-correction` for more informations.
-[include klipper-prusa-mk3s/extruders/linear-correction/linear-correction-0.cfg]
+[include linear-correction-0.cfg]
 
 [input_shaper]
 shaper_freq_x: 50 #(max recomended is 8.5k)
@@ -82,22 +91,16 @@ shaper_freq_y: 57 #(recomended is 9.6k)
 shaper_type_x: mzv
 shaper_type_y: mzv 
 
-[exclude_object]
-
 ### MACROS
-[include klipper-prusa-mk3s/macros.cfg]
+[include macros.cfg]
 
-[include KAMP_Settings.cfg]
+[include config_backup.cfg]
 
-# [include klipper-prusa-mk3s/macros/auto_speed.cfg]
+[include auto_speed.cfg]
 
-[include klipper-prusa-mk3s/macros/config_backup.cfg]
+[include flexplate.cfg]
 
-[include klipper-prusa-mk3s/macros/flexplate.cfg]
-
-[include klipper-prusa-mk3s/macros/spoolman.cfg]
-
-[include klipper-prusa-mk3s/macros/test_speed.cfg]
+[include test_speed.cfg] 
 
 #  File location of stored varibales
 [save_variables]
